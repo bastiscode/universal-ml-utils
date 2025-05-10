@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Iterable
+from typing import Any, Iterable
 
 
 def create_dir_from_file(path: str) -> str:
@@ -46,7 +46,7 @@ def dump_lines(lines: Iterable[str], path: str):
             outf.write(line + "\n")
 
 
-def load_jsonl_file(path: str) -> list:
+def load_jsonl(path: str) -> list:
     """
 
     Loads a JSONL file.
@@ -61,7 +61,7 @@ def load_jsonl_file(path: str) -> list:
     return data
 
 
-def dump_jsonl_file(items: Iterable, path: str):
+def dump_jsonl(items: Iterable, path: str):
     """
 
     Dumps a list of JSON objects to a file.
@@ -73,3 +73,27 @@ def dump_jsonl_file(items: Iterable, path: str):
     with open(path, "w", encoding="utf8") as outf:
         for item in items:
             outf.write(json.dumps(item) + "\n")
+
+
+def load_json(path: str) -> dict:
+    """
+
+    Loads a JSON file.
+
+    :param path: path to the file
+    :return: JSON object
+    """
+    with open(path, "r", encoding="utf8") as inf:
+        return json.load(inf)
+
+
+def dump_json(data: Any, path: str, **kwargs: Any):
+    """
+
+    Dumps a JSON object to a file.
+    :param data: JSON object
+    :param path: path to the file
+    """
+    create_dir_from_file(path)
+    with open(path, "w", encoding="utf8") as outf:
+        json.dump(data, outf, **kwargs)

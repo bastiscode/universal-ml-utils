@@ -46,6 +46,31 @@ def dump_lines(lines: Iterable[str], path: str):
             outf.write(line + "\n")
 
 
+def load_text(path: str) -> str:
+    """
+
+    Loads text from a file.
+
+    :param path: path to the file
+    :return: text content of the file
+    """
+    with open(path, "r", encoding="utf8") as inf:
+        return inf.read()
+
+
+def dump_text(text: str, path: str):
+    """
+
+    Dumps text to a file.
+
+    :param text: text content
+    :param path: path to the file
+    """
+    create_dir_from_file(path)
+    with open(path, "w", encoding="utf8") as outf:
+        outf.write(text)
+
+
 def load_jsonl(path: str) -> list:
     """
 
